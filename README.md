@@ -349,6 +349,88 @@ cost is more internal code.
 Built with the Python standard library, pytest, and pytest-cov. Facility scenarios
 are fictional and are not affiliated with any real operator.
 
+## System context
+
+The runtime is intentionally deterministic so that behaviour can be reviewed without
+running a model. An optional LLM planner can be attached later through the
+`Planner` seam in `src/iai/reasoning.py` without changing the eval contract.
+
+```text
+Operator question
+  -> intent router
+  -> investigation handler
+  -> policy-checked tools
+  -> evidence ledger
+  -> guardrails
+  -> auditable answer
+```
+
+## Safety and security model
+
+- Physical control is disabled by default and requires `IAI_ENABLE_WRITES=1`.
+- Setpoint writes require an engineer role and a confirmation token.
+- Writes are rate-limited per session and recorded in a hash chain.
+- Cross-site requests are refused to avoid mixing facility context.
+- Retrieved and tool-returned text is treated as untrusted data.
+- Instruction-like content is neutralised and reported, never executed.
+- Secrets and e-mail addresses are redacted from answers.
+- Stale or gapped telemetry lowers confidence and is disclosed.
+
+## Evaluation methodology
+
+The eval harness is the behavioural contract. Each case declares a weighted rubric
+and a pass threshold. A case passes only when the weighted score clears the
+threshold and no blocking criterion fails. CI fails if the suite pass rate drops
+below 1.0.
+
+Graders cover guardrails, grounding, citations, tool selection, escalation,
+clarification, status, keywords, forbidden phrases, latency, uncertainty,
+physical-write safety, disclosure, confidence, output contract, and tool budget.
+
+## Performance characteristics
+
+- Reference triage answer: ~10-20 ms on a laptop.
+- Full eval suite: ~0.6 s for 22 cases.
+- 119 tests: ~8 s.
+- No network calls and no model inference in the default path.
+
+## Configuration
+
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `IAI_DATA_DIR` | Override the data directory | bundled `data/` |
+| `IAI_API_TOKEN` | Bearer token for non-loopback binds | none |
+| `IAI_ENABLE_WRITES` | Enable physical-control tools | disabled |
+| `IAI_NOW` | Override the as-of time (not yet wired) | manifest value |
+
+## Development workflow
+
+```bash
+make install     # editable install with dev dependencies
+make validate    # ontology, telemetry, prompts, eval suite
+make test        # pytest with coverage
+make coverage    # coverage report and XML
+make evals       # regenerate scorecards
+make demo        # reference scenario
+make serve       # API on 127.0.0.1:8080
+```
+
+Pull requests must keep `make test` and `make evals` green and update documentation
+for user-facing changes.
+
+## Release process
+
+1. Run `make test` and `make evals`.
+2. Update `CHANGELOG.md` and `docs/TEST_RESULTS.md`.
+3. Tag with `vMAJOR.MINOR.PATCH`.
+4. Push `main` and the tag.
+
+## Support
+
+- Issues: https://github.com/MrKyaw/Industrial-Agent-Intelligence/issues
+- Security: see `SECURITY.md`
+- Documentation: `docs/`
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
