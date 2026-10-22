@@ -46,6 +46,14 @@ that makes that possible:
 - a behavioural eval harness with explicit graders, regression comparison, and a
   publication-ready scorecard.
 
+## About
+
+Industrial Agent Intelligence is a portfolio project demonstrating the applied-AI and
+agent-evaluation skills used to build trustworthy industrial agents: facility-grounded
+reasoning, policy-checked tool use, deterministic guardrails, behavioural evaluation,
+and feedback loops. All facility data is synthetic. No confidential information is
+included.
+
 ## Highlights
 
 - **Grounded by construction.** Every numeric claim in an answer is checked against
