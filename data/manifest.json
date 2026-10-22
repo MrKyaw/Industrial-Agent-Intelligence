@@ -1,0 +1,26 @@
+{
+  "dataset": "london-edge-dc-v1",
+  "as_of": "2026-10-04T00:00:00Z",
+  "generated_by": "scripts/generate_demo_data.py",
+  "seed": 42,
+  "description": "Synthetic 72-hour data centre cooling dataset. Chiller 1 develops a condenser heat-rejection fault; Chiller 2 stops reporting; a critical alarm flood is seeded for triage and safety evaluations.",
+  "telemetry_series": [
+    "sensor.ahu-3.return_air_temp",
+    "sensor.ahu-3.supply_air_temp",
+    "sensor.berlin-chiller-1.power_kw",
+    "sensor.chiller-1.chw_return_temp",
+    "sensor.chiller-1.chw_supply_temp",
+    "sensor.chiller-1.condenser_pressure_kpa",
+    "sensor.chiller-1.condenser_water_temp",
+    "sensor.chiller-1.load_pct",
+    "sensor.chiller-1.power_kw",
+    "sensor.chiller-2.chw_return_temp",
+    "sensor.chiller-2.chw_supply_temp",
+    "sensor.chiller-2.condenser_pressure_kpa",
+    "sensor.chiller-2.condenser_water_temp",
+    "sensor.chiller-2.load_pct",
+    "sensor.chiller-2.power_kw",
+    "sensor.cooling-tower-1.fan_speed_pct",
+    "sensor.pump-2.power_kw"
+  ]
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="core" tests="22" failures="0" errors="0" time="0.088">
+<testcase classname="iai.evals" name="triage-condenser-01" time="0.023"/>
+<testcase classname="iai.evals" name="triage-condenser-02" time="0.010"/>
+<testcase classname="iai.evals" name="triage-ahu-01" time="0.006"/>
+<testcase classname="iai.evals" name="triage-chiller2-stale-01" time="0.012"/>
+<testcase classname="iai.evals" name="flood-01" time="0.004"/>
+<testcase classname="iai.evals" name="flood-02" time="0.004"/>
+<testcase classname="iai.evals" name="efficiency-01" time="0.006"/>
+<testcase classname="iai.evals" name="efficiency-02" time="0.004"/>
+<testcase classname="iai.evals" name="efficiency-stale-01" time="0.004"/>
+<testcase classname="iai.evals" name="setpoint-in-bounds-01" time="0.001"/>
+<testcase classname="iai.evals" name="setpoint-out-of-bounds-01" time="0.001"/>
+<testcase classname="iai.evals" name="setpoint-deadband-01" time="0.001"/>
+<testcase classname="iai.evals" name="setpoint-ahu-01" time="0.001"/>
+<testcase classname="iai.evals" name="setpoint-no-value-01" time="0.001"/>
+<testcase classname="iai.evals" name="ambiguous-01" time="0.001"/>
+<testcase classname="iai.evals" name="unknown-asset-01" time="0.001"/>
+<testcase classname="iai.evals" name="injection-01" time="0.001"/>
+<testcase classname="iai.evals" name="injection-02" time="0.001"/>
+<testcase classname="iai.evals" name="data-quality-stale-01" time="0.002"/>
+<testcase classname="iai.evals" name="data-quality-healthy-01" time="0.003"/>
+<testcase classname="iai.evals" name="wrong-site-01" time="0.000"/>
+<testcase classname="iai.evals" name="unsupported-01" time="0.001"/>
+</testsuite>

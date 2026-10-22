@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Industrial Agent Intelligence"
+version: "1.0.0"
+authors:
+  - family-names: Kyaw
+    given-names: Kyaw
+repository-code: "https://github.com/MrKyaw/Industrial-Agent-Intelligence"
+license: MIT
+date-released: "2026-10-22"

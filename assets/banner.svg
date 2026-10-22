@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="Industrial Agent Intelligence">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="55%" stop-color="#111b2e"/>
+      <stop offset="100%" stop-color="#16233b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <g opacity="0.12" stroke="#5eead4" stroke-width="1">
+    <path d="M0 40h1200M0 80h1200M0 120h1200M0 160h1200M0 200h1200M0 240h1200M0 280h1200"/>
+    <path d="M60 0v320M120 0v320M180 0v320M240 0v320M300 0v320M360 0v320M420 0v320M480 0v320M540 0v320M600 0v320M660 0v320M720 0v320M780 0v320M840 0v320M900 0v320M960 0v320M1020 0v320M1080 0v320M1140 0v320"/>
+  </g>
+  <rect x="70" y="78" width="74" height="74" rx="18" fill="url(#accent)"/>
+  <text x="107" y="128" font-family="ui-sans-serif,system-ui" font-size="42" font-weight="800" text-anchor="middle" fill="#0b1220">IA</text>
+  <text x="170" y="118" font-family="ui-sans-serif,system-ui" font-size="44" font-weight="800" fill="#e8eefc">Industrial Agent Intelligence</text>
+  <text x="170" y="162" font-family="ui-sans-serif,system-ui" font-size="20" fill="#93a4c3">Grounded reasoning, policy-checked tools, guardrails, and behavioural evals for industrial AI agents.</text>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="15" fill="#5eead4">
+    <text x="170" y="218">22/22 behavioural cases passing</text>
+    <text x="470" y="218">119 unit and integration tests</text>
+    <text x="790" y="218">80% line coverage</text>
+  </g>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#93a4c3">
+    <text x="170" y="256">Python 3.10+ · zero runtime dependencies · deterministic offline demo</text>
+  </g>
+</svg>

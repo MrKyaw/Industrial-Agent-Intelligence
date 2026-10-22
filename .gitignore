@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Local runtime state
+*.db
+*.db-wal
+*.db-shm
+reports/feedback/
+reports/local/
+.env
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Keep published scorecards
+!reports/evals/latest.json
+!reports/evals/latest.md
+!reports/evals/latest.html
+!reports/evals/baseline.json

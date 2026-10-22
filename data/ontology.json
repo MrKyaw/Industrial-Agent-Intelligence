@@ -1,0 +1,502 @@
+{
+  "version": "1.2.0",
+  "metadata": {
+    "name": "London edge data centre + Berlin plant reference ontology",
+    "description": "Synthetic facility graph for agent reasoning and evaluation. All identifiers and readings are fictional.",
+    "maintainer": "Industrial Agent Intelligence",
+    "units": {
+      "temperature": "degC",
+      "pressure": "kPa",
+      "power": "kW",
+      "efficiency": "kW/ton",
+      "ratio": "COP"
+    }
+  },
+  "nodes": [
+    {
+      "id": "site.dc-lon-01",
+      "type": "site",
+      "name": "London Edge Data Center",
+      "attributes": { "criticality": 5, "timezone": "Europe/London", "region": "UK" },
+      "tags": ["datacenter", "critical", "cooling"]
+    },
+    {
+      "id": "site.plant-berlin-02",
+      "type": "site",
+      "name": "Berlin Plant",
+      "attributes": { "criticality": 3, "timezone": "Europe/Berlin", "region": "DE" },
+      "tags": ["industrial", "plant"]
+    },
+    {
+      "id": "plant.chiller-1",
+      "type": "equipment",
+      "subtype": "centrifugal_chiller",
+      "name": "Chiller 1",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "criticality": 5,
+        "design_tons": 500,
+        "service_area": "Hall A",
+        "commissioned": "2021-04-12",
+        "aliases": ["CH-1", "Chiller One"]
+      },
+      "tags": ["chiller", "cooling", "critical"]
+    },
+    {
+      "id": "plant.chiller-2",
+      "type": "equipment",
+      "subtype": "centrifugal_chiller",
+      "name": "Chiller 2",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "criticality": 4,
+        "design_tons": 500,
+        "service_area": "Hall B",
+        "commissioned": "2021-04-12",
+        "aliases": ["CH-2", "Chiller Two"]
+      },
+      "tags": ["chiller", "cooling"]
+    },
+    {
+      "id": "plant.pump-2",
+      "type": "equipment",
+      "subtype": "pump",
+      "name": "Primary CHW Pump 2",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "criticality": 3, "design_flow_lps": 48, "aliases": ["Pump 2", "CHWP-2"] },
+      "tags": ["pump", "chilled-water"]
+    },
+    {
+      "id": "plant.cooling-tower-1",
+      "type": "equipment",
+      "subtype": "cooling_tower",
+      "name": "Cooling Tower 1",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "criticality": 4, "cells": 2, "aliases": ["CT-1", "Tower 1"] },
+      "tags": ["cooling-tower", "heat-rejection"]
+    },
+    {
+      "id": "plant.ahu-3",
+      "type": "equipment",
+      "subtype": "ahu",
+      "name": "AHU 3",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "criticality": 3, "served_zones": ["Hall A", "Hall B"], "aliases": ["AHU-3", "Air Handler 3"] },
+      "tags": ["ahu", "air-handling"]
+    },
+    {
+      "id": "plant.berlin-chiller-1",
+      "type": "equipment",
+      "subtype": "reciprocating_chiller",
+      "name": "Berlin Chiller 1",
+      "site_id": "site.plant-berlin-02",
+      "attributes": { "criticality": 3, "design_tons": 180, "aliases": ["BER-CH-1"] },
+      "tags": ["chiller", "process"]
+    },
+
+    {
+      "id": "sensor.chiller-1.chw_supply_temp",
+      "type": "sensor",
+      "name": "Chiller 1 CHW supply temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "CHW_S1_T", "kind": "analog", "min": 2, "max": 20, "sample_interval_s": 3600, "aliases": ["CHW supply temperature"] },
+      "tags": ["chilled-water", "temperature", "supply"]
+    },
+    {
+      "id": "sensor.chiller-1.chw_return_temp",
+      "type": "sensor",
+      "name": "Chiller 1 CHW return temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "CHW_R1_T", "kind": "analog", "min": 2, "max": 25, "sample_interval_s": 3600 },
+      "tags": ["chilled-water", "temperature", "return"]
+    },
+    {
+      "id": "sensor.chiller-1.condenser_water_temp",
+      "type": "sensor",
+      "name": "Chiller 1 condenser leaving-water temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "CDW_L1_T", "kind": "analog", "min": 10, "max": 45, "sample_interval_s": 3600 },
+      "tags": ["condenser-water", "temperature"]
+    },
+    {
+      "id": "sensor.chiller-1.condenser_pressure_kpa",
+      "type": "sensor",
+      "name": "Chiller 1 condenser pressure",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "kPa", "point": "CDW_P1", "kind": "analog", "min": 0, "max": 3000, "sample_interval_s": 3600 },
+      "tags": ["condenser", "pressure", "high-pressure"]
+    },
+    {
+      "id": "sensor.chiller-1.power_kw",
+      "type": "sensor",
+      "name": "Chiller 1 electrical power",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "kW", "point": "CHL1_KW", "kind": "analog", "min": 0, "max": 700, "sample_interval_s": 3600 },
+      "tags": ["power", "efficiency"]
+    },
+    {
+      "id": "sensor.chiller-1.load_pct",
+      "type": "sensor",
+      "name": "Chiller 1 load",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "%", "point": "CHL1_LOAD", "kind": "analog", "min": 0, "max": 100, "sample_interval_s": 3600 },
+      "tags": ["load", "capacity"]
+    },
+    {
+      "id": "sensor.chiller-2.chw_supply_temp",
+      "type": "sensor",
+      "name": "Chiller 2 CHW supply temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "CHW_S2_T", "kind": "analog", "min": 2, "max": 20, "sample_interval_s": 3600 },
+      "tags": ["chilled-water", "temperature", "supply"]
+    },
+    {
+      "id": "sensor.chiller-2.chw_return_temp",
+      "type": "sensor",
+      "name": "Chiller 2 CHW return temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "CHW_R2_T", "kind": "analog", "min": 2, "max": 25, "sample_interval_s": 3600 },
+      "tags": ["chilled-water", "temperature", "return"]
+    },
+    {
+      "id": "sensor.chiller-2.condenser_water_temp",
+      "type": "sensor",
+      "name": "Chiller 2 condenser leaving-water temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "CDW_L2_T", "kind": "analog", "min": 10, "max": 45, "sample_interval_s": 3600 },
+      "tags": ["condenser-water", "temperature"]
+    },
+    {
+      "id": "sensor.chiller-2.condenser_pressure_kpa",
+      "type": "sensor",
+      "name": "Chiller 2 condenser pressure",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "kPa", "point": "CDW_P2", "kind": "analog", "min": 0, "max": 3000, "sample_interval_s": 3600 },
+      "tags": ["condenser", "pressure"]
+    },
+    {
+      "id": "sensor.chiller-2.power_kw",
+      "type": "sensor",
+      "name": "Chiller 2 electrical power",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "kW", "point": "CHL2_KW", "kind": "analog", "min": 0, "max": 700, "sample_interval_s": 3600 },
+      "tags": ["power", "efficiency"]
+    },
+    {
+      "id": "sensor.chiller-2.load_pct",
+      "type": "sensor",
+      "name": "Chiller 2 load",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "%", "point": "CHL2_LOAD", "kind": "analog", "min": 0, "max": 100, "sample_interval_s": 3600 },
+      "tags": ["load", "capacity"]
+    },
+    {
+      "id": "sensor.cooling-tower-1.fan_speed_pct",
+      "type": "sensor",
+      "name": "Cooling Tower 1 fan speed",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "%", "point": "CT1_FAN", "kind": "analog", "min": 0, "max": 100, "sample_interval_s": 3600 },
+      "tags": ["cooling-tower", "fan", "airflow"]
+    },
+    {
+      "id": "sensor.pump-2.power_kw",
+      "type": "sensor",
+      "name": "Primary CHW Pump 2 power",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "kW", "point": "CHWP2_KW", "kind": "analog", "min": 0, "max": 120, "sample_interval_s": 3600 },
+      "tags": ["pump", "power"]
+    },
+    {
+      "id": "sensor.ahu-3.supply_air_temp",
+      "type": "sensor",
+      "name": "AHU 3 supply-air temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "AHU3_SAT", "kind": "analog", "min": 5, "max": 35, "sample_interval_s": 3600 },
+      "tags": ["ahu", "temperature", "supply-air"]
+    },
+    {
+      "id": "sensor.ahu-3.return_air_temp",
+      "type": "sensor",
+      "name": "AHU 3 return-air temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "unit": "degC", "point": "AHU3_RAT", "kind": "analog", "min": 5, "max": 40, "sample_interval_s": 3600 },
+      "tags": ["ahu", "temperature", "return-air"]
+    },
+    {
+      "id": "sensor.berlin-chiller-1.power_kw",
+      "type": "sensor",
+      "name": "Berlin Chiller 1 power",
+      "site_id": "site.plant-berlin-02",
+      "attributes": { "unit": "kW", "point": "BER_CH1_KW", "kind": "analog", "min": 0, "max": 300, "sample_interval_s": 3600 },
+      "tags": ["power"]
+    },
+
+    {
+      "id": "derived.chiller-1.tons",
+      "type": "derived_tag",
+      "name": "Chiller 1 cooling load",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "tons",
+        "expression": "load_pct / 100.0 * 500.0",
+        "inputs": { "load_pct": "sensor.chiller-1.load_pct" },
+        "formula": "design_tons * load_pct / 100"
+      },
+      "tags": ["derived", "capacity"]
+    },
+    {
+      "id": "derived.chiller-1.delta_t",
+      "type": "derived_tag",
+      "name": "Chiller 1 CHW delta-T",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "degC",
+        "expression": "return_temp - supply_temp",
+        "inputs": { "return_temp": "sensor.chiller-1.chw_return_temp", "supply_temp": "sensor.chiller-1.chw_supply_temp" },
+        "formula": "CHW return - CHW supply"
+      },
+      "tags": ["derived", "delta-t", "efficiency"]
+    },
+    {
+      "id": "derived.chiller-1.approach_temp",
+      "type": "derived_tag",
+      "name": "Chiller 1 condenser approach proxy",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "degC",
+        "expression": "condenser_water_temp - supply_temp",
+        "inputs": { "condenser_water_temp": "sensor.chiller-1.condenser_water_temp", "supply_temp": "sensor.chiller-1.chw_supply_temp" },
+        "formula": "condenser leaving water - CHW supply (proxy, not saturated-condenser approach)"
+      },
+      "tags": ["derived", "approach", "condenser"]
+    },
+    {
+      "id": "derived.chiller-1.kw_per_ton",
+      "type": "derived_tag",
+      "name": "Chiller 1 kW per ton",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "kW/ton",
+        "expression": "power_kw / max(tons, 0.1)",
+        "inputs": { "power_kw": "sensor.chiller-1.power_kw", "tons": "derived.chiller-1.tons" },
+        "formula": "power_kw / max(tons, 0.1)"
+      },
+      "tags": ["derived", "efficiency"]
+    },
+    {
+      "id": "derived.chiller-1.cop",
+      "type": "derived_tag",
+      "name": "Chiller 1 COP",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "COP",
+        "expression": "(tons * 3.5168525) / power_kw",
+        "inputs": { "tons": "derived.chiller-1.tons", "power_kw": "sensor.chiller-1.power_kw" },
+        "formula": "cooling_kw / electrical_kw"
+      },
+      "tags": ["derived", "efficiency"]
+    },
+    {
+      "id": "derived.chiller-2.tons",
+      "type": "derived_tag",
+      "name": "Chiller 2 cooling load",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "tons",
+        "expression": "load_pct / 100.0 * 500.0",
+        "inputs": { "load_pct": "sensor.chiller-2.load_pct" },
+        "formula": "design_tons * load_pct / 100"
+      },
+      "tags": ["derived", "capacity"]
+    },
+    {
+      "id": "derived.chiller-2.delta_t",
+      "type": "derived_tag",
+      "name": "Chiller 2 CHW delta-T",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "degC",
+        "expression": "return_temp - supply_temp",
+        "inputs": { "return_temp": "sensor.chiller-2.chw_return_temp", "supply_temp": "sensor.chiller-2.chw_supply_temp" },
+        "formula": "CHW return - CHW supply"
+      },
+      "tags": ["derived", "delta-t"]
+    },
+    {
+      "id": "derived.chiller-2.approach_temp",
+      "type": "derived_tag",
+      "name": "Chiller 2 condenser approach proxy",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "degC",
+        "expression": "condenser_water_temp - supply_temp",
+        "inputs": { "condenser_water_temp": "sensor.chiller-2.condenser_water_temp", "supply_temp": "sensor.chiller-2.chw_supply_temp" },
+        "formula": "condenser leaving water - CHW supply (proxy)"
+      },
+      "tags": ["derived", "approach"]
+    },
+    {
+      "id": "derived.chiller-2.kw_per_ton",
+      "type": "derived_tag",
+      "name": "Chiller 2 kW per ton",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "kW/ton",
+        "expression": "power_kw / max(tons, 0.1)",
+        "inputs": { "power_kw": "sensor.chiller-2.power_kw", "tons": "derived.chiller-2.tons" },
+        "formula": "power_kw / max(tons, 0.1)"
+      },
+      "tags": ["derived", "efficiency"]
+    },
+    {
+      "id": "derived.chiller-2.cop",
+      "type": "derived_tag",
+      "name": "Chiller 2 COP",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "COP",
+        "expression": "(tons * 3.5168525) / power_kw",
+        "inputs": { "tons": "derived.chiller-2.tons", "power_kw": "sensor.chiller-2.power_kw" },
+        "formula": "cooling_kw / electrical_kw"
+      },
+      "tags": ["derived", "efficiency"]
+    },
+
+    {
+      "id": "setpoint.chiller-1.chw_supply",
+      "type": "setpoint",
+      "name": "Chiller 1 chilled-water supply setpoint",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "degC",
+        "min": 5.0,
+        "max": 9.0,
+        "default": 7.0,
+        "deadband": 0.3,
+        "writable": true,
+        "equipment_id": "plant.chiller-1",
+        "aliases": ["Chiller 1 chilled water supply setpoint", "CHW supply setpoint", "chilled water setpoint", "Chiller 1 setpoint"]
+      },
+      "tags": ["setpoint", "chilled-water", "writable"]
+    },
+    {
+      "id": "setpoint.ahu-3.supply_air",
+      "type": "setpoint",
+      "name": "AHU 3 supply-air temperature setpoint",
+      "site_id": "site.dc-lon-01",
+      "attributes": {
+        "unit": "degC",
+        "min": 16.0,
+        "max": 24.0,
+        "default": 20.0,
+        "deadband": 0.5,
+        "writable": true,
+        "equipment_id": "plant.ahu-3",
+        "aliases": ["AHU 3 supply air temperature setpoint", "AHU 3 setpoint", "supply air setpoint"]
+      },
+      "tags": ["setpoint", "air-handling", "writable"]
+    },
+
+    {
+      "id": "alarm.chiller-1.high_cond_pressure",
+      "type": "alarm_definition",
+      "name": "Chiller 1 high condenser pressure",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "severity": "critical", "threshold": 1800.0, "direction": "above", "tag": "sensor.chiller-1.condenser_pressure_kpa", "code": "high_condenser_pressure", "unit": "kPa" },
+      "tags": ["alarm", "pressure", "safety"]
+    },
+    {
+      "id": "alarm.chiller-1.low_delta_t",
+      "type": "alarm_definition",
+      "name": "Chiller 1 low delta-T",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "severity": "medium", "threshold": 4.0, "direction": "below", "tag": "derived.chiller-1.delta_t", "code": "low_delta_t", "unit": "degC" },
+      "tags": ["alarm", "delta-t", "efficiency"]
+    },
+    {
+      "id": "alarm.chiller-1.low_cop",
+      "type": "alarm_definition",
+      "name": "Chiller 1 low COP",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "severity": "medium", "threshold": 3.6, "direction": "below", "tag": "derived.chiller-1.cop", "code": "low_cop", "unit": "COP" },
+      "tags": ["alarm", "efficiency"]
+    },
+    {
+      "id": "alarm.chiller-2.high_cond_pressure",
+      "type": "alarm_definition",
+      "name": "Chiller 2 high condenser pressure",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "severity": "high", "threshold": 1800.0, "direction": "above", "tag": "sensor.chiller-2.condenser_pressure_kpa", "code": "high_condenser_pressure", "unit": "kPa" },
+      "tags": ["alarm", "pressure"]
+    },
+    {
+      "id": "alarm.ahu-3.supply_air_high",
+      "type": "alarm_definition",
+      "name": "AHU 3 high supply-air temperature",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "severity": "high", "threshold": 24.0, "direction": "above", "tag": "sensor.ahu-3.supply_air_temp", "code": "ahu_supply_air_high", "unit": "degC" },
+      "tags": ["alarm", "ahu", "temperature"]
+    },
+    {
+      "id": "alarm.cooling-tower-1.fan_high",
+      "type": "alarm_definition",
+      "name": "Cooling Tower 1 high fan speed",
+      "site_id": "site.dc-lon-01",
+      "attributes": { "severity": "medium", "threshold": 80.0, "direction": "above", "tag": "sensor.cooling-tower-1.fan_speed_pct", "code": "condenser_fan_high", "unit": "%" },
+      "tags": ["alarm", "cooling-tower", "fan"]
+    },
+    {
+      "id": "alarm.berlin.chiller_power_high",
+      "type": "alarm_definition",
+      "name": "Berlin Chiller 1 high power",
+      "site_id": "site.plant-berlin-02",
+      "attributes": { "severity": "medium", "threshold": 240.0, "direction": "above", "tag": "sensor.berlin-chiller-1.power_kw", "code": "power_high", "unit": "kW" },
+      "tags": ["alarm", "power"]
+    }
+  ],
+  "edges": [
+    { "src": "plant.chiller-1", "dst": "site.dc-lon-01", "relation": "part_of" },
+    { "src": "plant.chiller-2", "dst": "site.dc-lon-01", "relation": "part_of" },
+    { "src": "plant.pump-2", "dst": "site.dc-lon-01", "relation": "part_of" },
+    { "src": "plant.cooling-tower-1", "dst": "site.dc-lon-01", "relation": "part_of" },
+    { "src": "plant.ahu-3", "dst": "site.dc-lon-01", "relation": "part_of" },
+    { "src": "plant.berlin-chiller-1", "dst": "site.plant-berlin-02", "relation": "part_of" },
+
+    { "src": "sensor.chiller-1.chw_supply_temp", "dst": "plant.chiller-1", "relation": "measures" },
+    { "src": "sensor.chiller-1.chw_return_temp", "dst": "plant.chiller-1", "relation": "measures" },
+    { "src": "sensor.chiller-1.condenser_water_temp", "dst": "plant.chiller-1", "relation": "measures" },
+    { "src": "sensor.chiller-1.condenser_pressure_kpa", "dst": "plant.chiller-1", "relation": "measures" },
+    { "src": "sensor.chiller-1.power_kw", "dst": "plant.chiller-1", "relation": "measures" },
+    { "src": "sensor.chiller-1.load_pct", "dst": "plant.chiller-1", "relation": "measures" },
+    { "src": "sensor.chiller-2.chw_supply_temp", "dst": "plant.chiller-2", "relation": "measures" },
+    { "src": "sensor.chiller-2.chw_return_temp", "dst": "plant.chiller-2", "relation": "measures" },
+    { "src": "sensor.chiller-2.condenser_water_temp", "dst": "plant.chiller-2", "relation": "measures" },
+    { "src": "sensor.chiller-2.condenser_pressure_kpa", "dst": "plant.chiller-2", "relation": "measures" },
+    { "src": "sensor.chiller-2.power_kw", "dst": "plant.chiller-2", "relation": "measures" },
+    { "src": "sensor.chiller-2.load_pct", "dst": "plant.chiller-2", "relation": "measures" },
+    { "src": "sensor.cooling-tower-1.fan_speed_pct", "dst": "plant.cooling-tower-1", "relation": "measures" },
+    { "src": "sensor.pump-2.power_kw", "dst": "plant.pump-2", "relation": "measures" },
+    { "src": "sensor.ahu-3.supply_air_temp", "dst": "plant.ahu-3", "relation": "measures" },
+    { "src": "sensor.ahu-3.return_air_temp", "dst": "plant.ahu-3", "relation": "measures" },
+
+    { "src": "plant.cooling-tower-1", "dst": "plant.chiller-1", "relation": "serves" },
+    { "src": "plant.cooling-tower-1", "dst": "plant.chiller-2", "relation": "serves" },
+    { "src": "plant.pump-2", "dst": "plant.chiller-1", "relation": "serves" },
+    { "src": "plant.pump-2", "dst": "plant.chiller-2", "relation": "serves" },
+    { "src": "plant.chiller-1", "dst": "plant.ahu-3", "relation": "serves" },
+    { "src": "plant.chiller-2", "dst": "plant.ahu-3", "relation": "serves" },
+    { "src": "plant.chiller-1", "dst": "plant.cooling-tower-1", "relation": "depends_on" },
+    { "src": "plant.chiller-2", "dst": "plant.cooling-tower-1", "relation": "depends_on" },
+
+    { "src": "setpoint.chiller-1.chw_supply", "dst": "plant.chiller-1", "relation": "controls" },
+    { "src": "setpoint.ahu-3.supply_air", "dst": "plant.ahu-3", "relation": "controls" },
+
+    { "src": "alarm.chiller-1.high_cond_pressure", "dst": "sensor.chiller-1.condenser_pressure_kpa", "relation": "monitors" },
+    { "src": "alarm.chiller-1.low_delta_t", "dst": "derived.chiller-1.delta_t", "relation": "monitors" },
+    { "src": "alarm.chiller-1.low_cop", "dst": "derived.chiller-1.cop", "relation": "monitors" },
+    { "src": "alarm.chiller-2.high_cond_pressure", "dst": "sensor.chiller-2.condenser_pressure_kpa", "relation": "monitors" },
+    { "src": "alarm.ahu-3.supply_air_high", "dst": "sensor.ahu-3.supply_air_temp", "relation": "monitors" },
+    { "src": "alarm.cooling-tower-1.fan_high", "dst": "sensor.cooling-tower-1.fan_speed_pct", "relation": "monitors" },
+    { "src": "alarm.berlin.chiller_power_high", "dst": "sensor.berlin-chiller-1.power_kw", "relation": "monitors" }
+  ]
+}
