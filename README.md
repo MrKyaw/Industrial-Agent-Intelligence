@@ -238,3 +238,9 @@ configured threshold (default 1.0).
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+---
+
+⭐ Star this repo if you find it useful!
+
+Report Bug · Request Feature · Ask Question
