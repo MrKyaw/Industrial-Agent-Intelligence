@@ -243,6 +243,112 @@ python scripts/generate_demo_data.py
 The eval gate is deterministic and exits non-zero if the pass rate drops below the
 configured threshold (default 1.0).
 
+## Use cases
+
+- Alarm triage for a chiller plant: cluster a flood, rank root causes, and cite the
+  telemetry that supports each hypothesis.
+- Efficiency review: compute COP, kW/ton, and delta-T from aligned data instead of
+  trusting a dashboard screenshot.
+- Safe setpoint proposals: validate bounds and deadband, then route to an engineer.
+- Data-quality gating: refuse to tune controls against stale or gapped telemetry.
+- Prompt-injection resistance: treat maintenance notes as data, never as instruction.
+- Behavioural regression testing: fail CI when an agent's answers degrade.
+
+## Module reference
+
+| Module | Responsibility |
+| --- | --- |
+| `ontology.py` | Typed facility graph, validation, alias resolution, subgraphs |
+| `telemetry.py` | Series, gaps, staleness, anomalies, derived tags, operational math |
+| `alarms.py` | Ingestion, clustering, prioritisation, flooding, root-cause ranking |
+| `tools.py` | Registry, JSON-schema validation, policy, execution, audit chain |
+| `guardrails.py` | Numeric grounding, citations, bounds, escalation, injection, secrets, tone |
+| `retrieval.py` | Chunking, BM25, hybrid retrieval, context packing |
+| `prompts.py` | Versioned templates with strict rendering and checksums |
+| `reasoning.py` | Intent routing, investigation handlers, evidence ledger, safe fallback |
+| `evals.py` | Cases, graders, runner, regression comparison |
+| `feedback.py` | SQLite feedback, labels, drift detection |
+| `report.py` | Markdown, HTML, and JUnit rendering |
+| `api.py` | Read-only HTTP API and dashboard |
+| `cli.py` | Command-line interface |
+| `app.py` | Application wiring and default tools |
+
+## Example interactions
+
+### Efficiency review
+
+```text
+$ python -m iai ask "How efficient is Chiller 1 right now?" --site site.dc-lon-01
+status:       answered
+confidence:   0.80
+...
+Chiller 1 is currently operating at a COP of 3.42, 1.03 kW/ton, and a
+chilled-water delta-T of 3.6 degC.
+```
+
+### Data quality
+
+```text
+$ python -m iai ask "Is Chiller 2 telemetry stale or missing data?" --site site.dc-lon-01
+status:       answered
+...
+Chiller 2 telemetry is stale, so I cannot support a reliable diagnosis from it.
+```
+
+### Unsafe setpoint
+
+```text
+$ python -m iai ask "Set Chiller 1 chilled water supply setpoint to 1 C." --site site.dc-lon-01 --role engineer
+status:       escalated
+...
+I cannot propose 1.0 degC for Chiller 1 chilled-water supply setpoint: The
+requested value is outside the allowed range 5.0-9.0.
+```
+
+## Metrics
+
+| Metric | Value |
+| --- | ---: |
+| Behavioural eval cases | 22 |
+| Eval pass rate | 100.0% |
+| Mean eval score | 0.997 |
+| Unit and integration tests | 119 |
+| Test pass rate | 100% |
+| Line and branch coverage | 79.94% |
+| Default tools | 10 |
+| Knowledge documents | 10 |
+| Telemetry series | 17 |
+| Ontology nodes | 60+ |
+| Runtime dependencies | 0 |
+
+## Roadmap
+
+- Optional LLM planner with structured-output repair and retry.
+- Online telemetry ingestion instead of pinned CSV files.
+- Labelling UI for operator feedback.
+- Multi-site federation and cross-site safety checks.
+- Richer root-cause models with learned weights.
+- Container image and Kubernetes manifests.
+
+## FAQ
+
+**Is this a real product?** No. It is a reference implementation for evaluation and
+demonstration. The data is synthetic.
+
+**Does it call an LLM?** No. The reference agent is deterministic. An optional
+OpenAI-compatible planner can be added without changing the eval contract.
+
+**Can it write to a controller?** Not by default. Physical control is disabled and
+requires an engineer role plus a confirmation token.
+
+**Why zero runtime dependencies?** To make review and installation trivial. The
+cost is more internal code.
+
+## Acknowledgements
+
+Built with the Python standard library, pytest, and pytest-cov. Facility scenarios
+are fictional and are not affiliated with any real operator.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
